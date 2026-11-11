@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>JUDO CARE</title>
+<style>
+:root {
+  --bg-color: #0b0c10;
+  --accent-color: #00adb5;
+  --accent-glow: rgba(0, 173, 181, 0.45);
+  --danger-color: #ff3b30;
+  --btn-bg: #1c202d;
+  --btn-border: #2c3246;
+  --text-main: #ffffff;
+  --text-sub: #8e92a4;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+header {
+  height: 48px;
+  background: linear-gradient(180deg, rgba(22,25,35,0.95) 0%, rgba(11,12,16,0.95) 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  z-index: 10;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.brand-tag {
+  background: var(--accent-color);
+  color: #000;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+.brand-name {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.05);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff9500;
+}
+.status-active {
+  background: var(--accent-color);
+  box-shadow: 0 0 8px var(--accent-color);
+}
+#st {
+  font-size: 11px;
+  font-weight: bold;
+}
+.custom-select {
+  background: var(--btn-bg);
+  color: var(--text-main);
+  border: 1px solid var(--btn-border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  outline: none;
+}
+
+#stage {
+  flex: 1;
+  position: relative;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#pip-wrap {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 160px;
+  height: 96px;
+  background: #000;
+  border: 2px solid var(--accent-color);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 20;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+#pip {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pip-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: rgba(255, 59, 48, 0.9);
+  color: #fff;
+  font-size: 8px;
+  font-weight: 900;
+  padding: 1px 4px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.pip-dot {
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.grid-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  display: none;
+  z-index: 5;
+}
+.grid-line-h { position: absolute; width: 100%; height: 1px; background: rgba(255,255,255,0.25); }
+.grid-line-v { position: absolute; height: 100%; width: 1px; background: rgba(255,255,255,0.25); }
+
+#mask {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(20,24,35,0.98) 0%, rgba(10,11,15,0.98) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  z-index: 30;
+}
+#btn-start {
+  background: linear-gradient(135deg, var(--accent-color) 0%, #007c82 100%);
+  color: #000;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 0 25px rgba(0, 173, 181, 0.45);
+}
+.mask-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+  text-align: center;
+  line-height: 1.6;
+}
+
+footer {
+  background: #0b0c10;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 10px 16px 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+.seekbar-container {
+  display: flex;
+  align-items: center;
+  gap:
